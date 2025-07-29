@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Novely Gasis Jr | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+/* Import Google Fonts for futuristic styling */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family:'Space Mono', monospace; /* Futuristic body font */
+    color:#333;
+    background:#f4f7f6;
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+    line-height:1.7;
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+}
+a { text-decoration:none; color:#2E86C1; }
+a:hover { text-decoration:underline; }
+
+/* Header Navigation */
+header {
+    background:rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    padding:15px 30px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.08); /* Slightly stronger shadow */
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for potential scroll effects */
+}
+header .logo {
+    font-family:'Orbitron', sans-serif; /* Futuristic logo font */
+    font-weight:700;
+    font-size:1.6rem;
+    color:#2E86C1;
+    transition: color 0.3s ease;
+}
+header nav ul {
+    list-style:none;
+    display:flex;
+    position:relative; /* Needed for the active indicator */
+}
+header nav ul li {
+    margin-left:30px;
+}
+header nav ul li a {
+    font-family:'Space Mono', monospace; /* Ensure nav links use space mono */
+    color:#5D6D7E;
+    font-weight:500;
+    transition:color 0.3s ease, transform 0.2s ease; /* Added transform for hover */
+    padding: 5px 0; /* Add padding for a better clickable area */
+    position: relative; /* Needed for the underline hover effect */
+}
+header nav ul li a:hover {
+    color:#2E86C1;
+    text-decoration:none; /* Remove default underline */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Underline on hover effect */
+header nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #F39C12; /* Accent color for underline */
+    transition: width 0.3s ease-out;
+}
+
+header nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Active link indicator */
+header nav ul .nav-indicator {
+    position: absolute;
+    height: 4px; /* Thickness of the indicator */
+    background-color: #2E86C1; /* Main accent color */
+    border-radius: 2px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Smooth, springy animation */
+    bottom: -10px; /* Position it below the links */
+    opacity: 0; /* Hidden by default */
+}
+
+/* Active link styling */
+header nav ul li a.active {
+    color: #2E86C1; /* Active link color */
+    font-weight: 600; /* Bold active link */
+}
+
+/* Dark/Light Mode Toggle Button Styling */
+#theme-toggle {
+    background: none; /* Make button background transparent */
+    border: 2px solid #2E86C1; /* Border color from your theme */
+    color: #2E86C1; /* Icon color from your theme */
+    width: 45px; /* Adjust size as needed */
+    height: 45px; /* Adjust size as needed */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem; /* Icon size */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none; /* Remove default button shadow */
+    margin-left: 20px; /* Space from navigation */
+    padding: 0; /* Remove default padding for tighter circle */
+}
+
+#theme-toggle:hover {
+    background: #2E86C1;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media(max-width:768px) {
+    header nav { display:none; } /* Hide nav on small screens, can implement hamburger menu */
+    header { justify-content:center; } /* Center items when nav is hidden */
+    header #theme-toggle { margin-left: 10px; } /* Adjust margin for small screens */
+}
+
+/* Sections */
+section {
+    padding:100px 30px;
+    max-width:1000px;
+    margin:60px auto;
+    background:rgba(255, 255, 255, 0.7); /* More semi-transparent white */
+    border-radius:15px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+    opacity:0;
+    transform:translateY(50px);
+    transition:opacity .8s ease-out, transform .8s ease-out, background 0.3s ease, box-shadow 0.3s ease;
+}
+section.active {
+    opacity:1;
+    transform:translateY(0);
+}
+@media(max-width:600px){
+    section { padding:70px 20px; margin:40px auto; }
+}
+h2 {
+    margin-bottom:35px;
+    color:#2E86C1;
+    text-align:center;
+    font-family:'Orbitron', sans-serif; /* Futuristic heading font */
+    font-size:2.5rem;
+    font-weight:700;
+    position:relative;
+    padding-bottom:10px;
+    transition: color 0.3s ease;
+}
+h2::after {
+    content:'';
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:70px;
+    height:4px;
+    background:#F39C12;
+    border-radius:2px;
+}
+article h3 {
+    color:#34495E;
+    font-size:1.8rem;
+    margin-bottom:12px;
+    font-family:'Orbitron', sans-serif; /* Futuristic subheading font */
+    font-weight:600;
+    transition: color 0.3s ease;
+}
+p, li {
+    line-height:1.8;
+    margin:8px 0;
+    color:#5D6D7E;
+    font-family:'Space Mono', monospace; /* Ensure body text uses space mono */
+    transition: color 0.3s ease;
+}
+ul { margin-left:25px; }
+img {
+    display:block;
+    margin:25px auto;
+    max-width:100%;
+    height:auto;
+    border-radius:10px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    transition:transform .4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+}
+img:hover {
+    transform: scale(1.03);
+}
+
+/* Buttons */
+.buttons {
+    margin-top:30px;
+    text-align:center;
+    display: flex; /* Added for side-by-side buttons */
+    justify-content: center; /* Added for side-by-side buttons */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 15px; /* Space between buttons */
+}
+a.button, button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 25px;
+    background:#2E86C1;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    font-size:1.1rem;
+    font-family:'Space Mono', monospace; /* Buttons also get space mono */
+    transition:background .3s ease, transform .2s ease, box-shadow .3s ease, color 0.3s ease;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.1);
+}
+a.button:hover, button:hover {
+    background:#21618C;
+    transform: translateY(-3px);
+    box-shadow:0 7px 15px rgba(0, 0, 0, 0.15);
+    text-decoration:none;
+}
+button#view-resume-btn, button#view-cert-btn, button#view-award-btn {
+    background:#F39C12;
+}
+button#view-resume-btn:hover, button#view-cert-btn:hover, button#view-award-btn:hover {
+    background:#E67E22;
+}
+/* Style for Print button - using the same primary blue for consistency or choose another */
+.print-button {
+    background: #4CAF50; /* A green color, common for print */
+}
+.print-button:hover {
+    background: #45a049; /* Darker green on hover */
+}
+
+
+/* Form */
+#contact-form {
+    max-width:700px;
+    margin:60px auto;
+    background:rgba(255, 255, 255, 0.7); /* More semi-transparent white */
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+    opacity:0;
+    transform:translateY(50px);
+    transition:opacity .8s ease-out, transform .8s ease-out, background 0.3s ease, box-shadow 0.3s ease;
+}
+#contact-form.active {
+    opacity:1;
+    transform:translateY(0);
+}
+.input-container {
+    position:relative;
+    margin-bottom:20px;
+}
+.input-container .icon {
+    position:absolute;
+    top:50%;
+    left:15px;
+    transform:translateY(-50%);
+    color:#2E86C1;
+    font-size:1.1rem;
+    transition: color 0.3s ease;
+}
+input, textarea {
+    width:100%;
+    padding:15px 15px 15px 50px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    transition: border-color .3s ease, box-shadow .3s ease, background 0.3s ease, color 0.3s ease;
+    font-size:1rem;
+    color:#333;
+    background: #fff;
+    font-family:'Space Mono', monospace; /* Input fields also get space mono */
+}
+input:focus, textarea:focus {
+    border-color:#2E86C1;
+    outline:none;
+    box-shadow:0 0 0 3px rgba(46, 134, 193, 0.2);
+}
+textarea { resize:vertical; min-height:120px; }
+#contact-form button {
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+}
+
+/* Hero section specific */
+#hero {
+    text-align:center;
+    padding-top:150px; /* More space at the top */
+    padding-bottom:100px;
+    background:linear-gradient(135deg, #E0F2F7 0%, #CCDDE2 100%); /* Lighter gradient background */
+    box-shadow:none; /* Remove box shadow for hero */
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+#hero img {
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid #F39C12; /* Gold border for profile picture */
+    box-shadow:0 0 0 8px rgba(243, 156, 18, 0.2); /* Soft glow */
+    margin-bottom:30px;
+}
+#hero h2 {
+    font-size:3.5rem;
+    color:#2E86C1;
+    margin-bottom:20px;
+    font-family:'Orbitron', sans-serif; /* Futuristic heading font */
+}
+#hero h2::after { display:none; } /* No underline for hero h2 */
+#hero p {
+    font-size:1.3rem;
+    max-width:700px;
+    margin:0 auto 15px auto;
+    color:#34495E;
+    font-family:'Space Mono', monospace; /* Hero paragraph also gets space mono */
+}
+
+/* Skills Grid */
+#skills .skill-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:25px;
+    text-align:center;
+    margin-top:30px;
+}
+#skills .skill-grid span {
+    background:#F8F9F9;
+    padding:20px 10px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.05);
+    transition:transform .3s ease, box-shadow .3s ease, background 0.3s ease, color 0.3s ease;
+    font-size:1.1rem;
+    color:#34495E;
+    font-weight:500;
+    font-family:'Space Mono', monospace; /* Skill names use space mono */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+#skills .skill-grid span i {
+    font-size:2.5rem;
+    /* Default color, overridden by specific styles below */
+    color:#2E86C1; /* Keep a fallback or default */
+    transition: color 0.3s ease;
+}
+#skills .skill-grid span:hover {
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Specific Skill Icon Colors */
+#skills .skill-grid span i.fab.fa-html5 { color: #E34F26; } /* HTML5 Orange */
+#skills .skill-grid span i.fab.fa-css3-alt { color: #1572B6; } /* CSS3 Blue */
+#skills .skill-grid span i.fab.fa-js { color: #F7DF1E; } /* JavaScript Yellow */
+#skills .skill-grid span i.fab.fa-php { color: #777BB4; } /* PHP Purple */
+#skills .skill-grid span i.fa-database { color: #FF6600; } /* Database/Firebase Orange */
+#skills .skill-grid span i.fa-code.fa-java { color: #007396; } /* Java Blue */
+#skills .skill-grid span i.fab.fa-python { color: #3776AB; } /* Python Blue */
+#skills .skill-grid span i.fa-c { color: #A8B9CC; } /* C Gray */
+#skills .skill-grid span i.fa-mobile-alt { color: #2ecc71; } /* Mobile App Dev Green */
+#skills .skill-grid span i.fa-lightbulb { color: #f1c40f; } /* Problem Solving Yellow */
+/* NEW: Hardware Icon Color */
+#skills .skill-grid span i.fa-server { color: #9B59B6; } /* Purple for Hardware */
+/* NEW: Network Icon Color */
+#skills .skill-grid span i.fa-network-wired { color: #1ABC9C; } /* Turquoise for Network */
+
+
+/* Footer */
+footer {
+    background:#34495E;
+    color:#fff;
+    padding:60px 20px; /* Increased padding from 40px to 60px */
+    text-align:center;
+    margin-top:80px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+footer .footer-content {
+    max-width:900px; /* Slightly increased max-width for content */
+    margin:0 auto;
+}
+footer p {
+    margin-bottom:18px; /* Increased margin-bottom for more spacing */
+    font-size:1.15rem; /* Slightly increased font size */
+    color:#eee;
+    font-family:'Space Mono', monospace; /* Footer text also gets space mono */
+    transition: color 0.3s ease;
+}
+/* New style for the email link in the footer */
+footer p a {
+    color: #F39C12; /* Using the existing accent orange for legibility */
+    text-decoration: none; /* Remove default underline */
+    transition: color 0.3s ease;
+}
+
+footer p a:hover {
+    color: #E67E22; /* Slightly darker orange on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+footer .copyright { /* New class for the copyright paragraph */
+    margin-top:30px; /* Add some space above the copyright */
+    font-size:1rem; /* Keep copyright slightly smaller */
+    color:#ccc; /* Make copyright text a bit lighter */
+    transition: color 0.3s ease;
+}
+footer .social-links a {
+    color:#fff;
+    font-size:2.2rem; /* Increased social icon size */
+    margin:0 20px; /* Increased margin between social icons */
+    transition:color .3s ease;
+}
+footer .social-links a:hover {
+    color:#F39C12;
+    text-decoration:none;
+}
+/* Bubble background */
+#background-wrap {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-1;
+    overflow:hidden;
+    pointer-events:none; /* Ensure bubbles don't interfere with interactions */
+    background: rgba(173, 216, 230, 0.3); /* Light blue semi-transparent background */
+}
+.bubble {
+    position:absolute; bottom:-150px;
+    background:rgba(46,134,193,0.12); /* Slightly darker and more opaque blue */
+    border-radius:50%;
+    animation:rise infinite ease-in;
+    transition: background 0.3s ease; /* Smooth transition for bubble color */
+}
+
+/* More varied sizes, positions, durations, and delays for more visual interest */
+.bubble.x1 { width:60px; height:60px; left:10%; animation-duration:18s; animation-delay:1s; }
+.bubble.x2 { width:85px; height:85px; left:35%; animation-duration:22s; animation-delay:3s; }
+.bubble.x3 { width:45px; height:45px; left:60%; animation-duration:14s; animation-delay:0s; }
+.bubble.x4 { width:100px; height:100px; left:80%; animation-duration:25s; animation-delay:2s; }
+.bubble.x5 { width:55px; height:55px; left:5%; animation-duration:16s; animation-delay:4s; }
+.bubble.x6 { width:75px; height:75px; left:50%; animation-duration:20s; animation-delay:1.5s; }
+.bubble.x7 { width:95px; height:95px; left:20%; animation-duration:28s; animation-delay:0.5s; }
+.bubble.x8 { width:40px; height:40px; left:75%; animation-duration:12s; animation-delay:3.5s; }
+.bubble.x9 { width:70px; height:70px; left:90%; animation-duration:19s; animation-delay:2.5s; }
+.bubble.x10 { width:50px; height:50px; left:40%; animation-duration:15s; animation-delay:4s; }
+
+/* Triangles */
+.triangle {
+    position: absolute;
+    bottom: -150px;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 45px solid rgba(173, 216, 230, 0.3); /* Light blue semi-transparent triangle */
+    animation: riseTriangle infinite ease-in;
+    transition: border-bottom-color 0.3s ease;
+}
+
+/* Triangle variations for more visual interest */
+.triangle.t1 { left: 15%; animation-duration: 20s; animation-delay: 0s; transform: rotate(15deg); }
+.triangle.t2 { left: 45%; animation-duration: 24s; animation-delay: 2s; transform: rotate(45deg); }
+.triangle.t3 { left: 70%; animation-duration: 18s; animation-delay: 1s; transform: rotate(30deg); }
+.triangle.t4 { left: 25%; animation-duration: 22s; animation-delay: 3s; transform: rotate(60deg); }
+.triangle.t5 { left: 85%; animation-duration: 16s; animation-delay: 0.5s; transform: rotate(75deg); }
+
+/* NEW: Diamond Shapes */
+.diamond {
+    position: absolute;
+    bottom: -150px;
+    width: 50px; /* Base size */
+    height: 50px; /* Base size */
+    background: rgba(243, 156, 18, 0.2); /* Accent color, semi-transparent */
+    transform: rotate(45deg); /* Rotate to make it a diamond */
+    animation: riseDiamond infinite ease-in;
+    transition: background 0.3s ease;
+}
+.diamond.d1 { left: 5%; animation-duration: 21s; animation-delay: 0.8s; width: 40px; height: 40px;}
+.diamond.d2 { left: 30%; animation-duration: 17s; animation-delay: 3.2s; width: 60px; height: 60px;}
+.diamond.d3 { left: 65%; animation-duration: 26s; animation-delay: 1.5s; width: 55px; height: 55px;}
+.diamond.d4 { left: 95%; animation-duration: 19s; animation-delay: 4s; width: 45px; height: 45px;}
+.diamond.d5 { left: 50%; animation-duration: 23s; animation-delay: 2.1s; width: 70px; height: 70px;}
+
+
+@keyframes rise {
+    0% { bottom:-150px; opacity:0; transform:translateX(0) scale(1); }
+    30% { opacity:0.8; }
+    70% { opacity:0.5; }
+    100% { bottom:120%; opacity:0; transform:translateX(30px) scale(1.1); } /* Slight scale up */
+}
+
+@keyframes riseTriangle {
+    0% { bottom:-150px; opacity:0; transform:translateY(0) rotate(var(--initial-rotation, 0deg)); }
+    30% { opacity:0.6; }
+    70% { opacity:0.3; }
+    100% { bottom:120%; opacity:0; transform:translateY(-20px) rotate(calc(var(--initial-rotation, 0deg) + 90deg)); }
+}
+
+@keyframes riseDiamond {
+    0% { bottom:-150px; opacity:0; transform:translateY(0) rotate(45deg); }
+    30% { opacity:0.7; }
+    70% { opacity:0.4; }
+    100% { bottom:120%; opacity:0; transform:translateY(-40px) rotate(225deg); } /* Continues rotation */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: #2c3e50; /* Dark background */
+    color: #ecf0f1; /* Light text for dark mode */
+}
+
+body.dark-mode header {
+    background: rgba(44, 62, 80, 0.9); /* Darker semi-transparent header */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+}
+
+body.dark-mode header .logo {
+    color: #F39C12; /* Accent color for logo in dark mode */
+}
+
+body.dark-mode header nav ul li a {
+    color: #bdc3c7; /* Lighter link color in dark mode */
+}
+
+body.dark-mode header nav ul li a:hover {
+    color: #F39C12; /* Accent hover color */
+}
+
+body.dark-mode header nav ul li a.active {
+    color: #F39C12; /* Accent active link color */
+}
+
+body.dark-mode section {
+    background: rgba(52, 73, 94, 0.7); /* Darker, more semi-transparent section background */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+body.dark-mode h2 {
+    color: #F39C12; /* Accent color for headings */
+}
+
+body.dark-mode article h3 {
+    color: #ecf0f1; /* Light text for subheadings */
+}
+
+body.dark-mode p, body.dark-mode li {
+    color: #bdc3c7; /* Lighter text for paragraphs and lists */
+}
+
+body.dark-mode #skills .skill-grid span {
+    background: #4a667f; /* Darker skill grid background */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    color: #ecf0f1;
+}
+
+body.dark-mode #skills .skill-grid span:hover {
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+body.dark-mode a.button, body.dark-mode button {
+    background: #F39C12; /* Use accent for buttons in dark mode */
+    color: #333; /* Dark text on light button */
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.3);
+}
+body.dark-mode a.button:hover, body.dark-mode button:hover {
+    background: #E67E22;
+    box-shadow:0 7px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode button#view-resume-btn, body.dark-mode button#view-cert-btn, body.dark-mode button#view-award-btn {
+    background:#2E86C1; /* Primary blue for these buttons in dark mode */
+    color: #fff;
+}
+body.dark-mode button#view-resume-btn:hover, body.dark-mode button#view-cert-btn:hover, body.dark-mode button#view-award-btn:hover {
+    background:#21618C;
+}
+
+body.dark-mode .print-button {
+    background: #27ae60; /* Darker green for print button */
+}
+body.dark-mode .print-button:hover {
+    background: #229954;
+}
+
+body.dark-mode #contact-form {
+    background: rgba(52, 73, 94, 0.7); /* Darker, more semi-transparent form background */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .input-container .icon {
+    color: #F39C12; /* Accent color for form icons */
+}
+
+body.dark-mode input, body.dark-mode textarea {
+    background: #4a667f; /* Darker input background */
+    border-color: #5D6D7E; /* Darker border */
+    color: #ecf0f1; /* Light text for input */
+}
+
+body.dark-mode input:focus, body.dark-mode textarea:focus {
+    border-color: #F39C12; /* Accent border on focus */
+    outline:none;
+    box-shadow:0 0 0 3px rgba(243, 156, 18, 0.2); /* Accent glow on focus */
+}
+
+body.dark-mode footer {
+    background: #1a242f; /* Even darker footer background */
+}
+
+body.dark-mode footer p {
+    color: #bdc3c7;
+}
+
+body.dark-mode footer p a {
+    color: #F39C12; /* Accent for email link */
+}
+
+body.dark-mode footer p a:hover {
+    color: #E67E22;
+}
+
+body.dark-mode footer .social-links a {
+    color: #F39C12; /* Accent for social links */
+}
+
+body.dark-mode footer .social-links a:hover {
+    color: #ecf0f1; /* White on hover for social links */
+}
+/* Ensure the bubbles remain light against the dark background */
+body.dark-mode .bubble {
+    background: rgba(255, 255, 255, 0.08); /* Lighter bubbles in dark mode */
+}
+body.dark-mode .triangle {
+    border-bottom-color: rgba(255, 255, 255, 0.08); /* Lighter triangles in dark mode */
+}
+body.dark-mode .diamond {
+    background: rgba(255, 255, 255, 0.15); /* Lighter diamonds in dark mode */
+}
+/* NEW: Dark Mode Hardware Icon Color */
+body.dark-mode #skills .skill-grid span i.fa-server { color: #DDA0DD; } /* Lighter purple for dark mode */
+/* NEW: Dark Mode Network Icon Color */
+body.dark-mode #skills .skill-grid span i.fa-network-wired { color: #82E0AA; } /* Lighter turquoise for dark mode */
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    header { padding:15px 20px; }
+    header .logo { font-size:1.4rem; }
+    #hero h2 { font-size:2.5rem; }
+    #hero p { font-size:1.1rem; }
+    section { margin:40px auto; padding:60px 20px; }
+    h2 { font-size:2rem; margin-bottom:25px; }
+    article h3 { font-size:1.5rem; }
+    a.button, button { padding:12px 20px; font-size:1rem; }
+    #skills .skill-grid { grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:15px; }
+    #skills .skill-grid span i { font-size:2rem; }
+    #contact-form { padding:30px 20px; }
+    footer { padding:30px 15px; }
+    footer .social-links a { font-size:1.5rem; margin:0 10px; }
+}
+
+@media (max-width: 480px) {
+    #hero h2 { font-size:2rem; }
+    #hero p { font-size:1rem; }
+    section { padding:40px 15px; }
+    h2 { font-size:1.8rem; }
+    article h3 { font-size:1.3rem; }
+    a.button, button { display:block; margin:10px auto; width:calc(100% - 20px); }
+    #skills .skill-grid { grid-template-columns:1fr 1fr; } /* Two columns on very small screens */
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        gap: 10px;
+    }
+}
+</style>
+</head>
+<body>
+
+    <div id="background-wrap">
+        <div class="bubble x1"></div><div class="bubble x2"></div><div class="bubble x3"></div>
+        <div class="bubble x4"></div><div class="bubble x5"></div><div class="bubble x6"></div>
+        <div class="bubble x7"></div><div class="bubble x8"></div><div class="bubble x9"></div>
+        <div class="bubble x10"></div>
+        <div class="bubble x1"></div>
+<div class="bubble x10"></div>
+
+<div class="triangle t1"></div>
+<div class="triangle t5"></div>
+
+<div class="diamond d1"></div>
+<div class="diamond d2"></div>
+<div class="diamond d3"></div>
+<div class="diamond d4"></div>
+<div class="diamond d5"></div>
+    </div>
+
+    <header>
+        <div class="logo">Novely Gasis Jr</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#internship">Internship</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" class="button theme-toggle">
+            <i class="fas fa-moon"></i> </button>
+    </header>
+
+    <section id="hero" class="active">
+        <img src="picture.jpeg" alt="Novely Gasis Jr"/>
+        <h2>Hi, I'm Novely Gasis Jr 👋</h2>
+        <p>A fresh Computer Science graduate from Capiz State University, passionate about coding and dedicated to crafting high‑quality web and software applications.</p>
+        <p>I thrive on challenges and am **eager to learn and upgrade my programming skills**. Let's build and learn something amazing together!</p>
+    </section>
+
+    <section id="resume">
+        <h2><i class="fa fa-file-alt"></i> My Resume</h2>
+        <div class="buttons">
+            <button id="view-resume-btn"><i class="fa fa-eye"></i> View Resume</button>
+        </div>
+        <div id="resume-container" style="display:none">
+            <img src="cv.jpeg" alt="Novely Gasis Jr Resume" id="resume-container-img"/>
+            <div class="buttons">
+                <a href="cv.jpeg" class="button" download="Novely_GasisJr_Resume.jpeg"><i class="fa fa-download"></i> Download Resume</a>
+                <button class="button print-button" data-print-target="resume-container-img"><i class="fa fa-print"></i> Print Resume</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2><i class="fa fa-tools"></i> Skills & Expertise</h2>
+        <div class="skill-grid">
+            <span><i class="fab fa-html5"></i> HTML</span>
+            <span><i class="fab fa-css3-alt"></i> CSS</span>
+            <span><i class="fab fa-js"></i> JavaScript</span>
+            <span><i class="fab fa-php"></i> PHP & MySQL</span>
+            <span><i class="fa fa-database"></i> Firebase Realtime Database</span>
+            <span><i class="fa fa-code fa-java"></i> Java</span>
+            <span><i class="fab fa-python"></i> Python</span>
+            <span><i class="fa fa-c"></i> C</span>
+            <span><i class="fa fa-mobile-alt"></i> Mobile App Dev</span>
+            <span><i class="fa fa-lightbulb"></i> Problem Solving</span>
+            <span><i class="fa fa-server"></i> Hardware</span>
+            <span><i class="fa fa-network-wired"></i> Network</span>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2><i class="fa fa-folder-open"></i> Projects</h2>
+        <article>
+            <h3>Student Financial Assistance Recommender System</h3>
+            <p><strong>Technologies:</strong> MySQL, JavaScript</p>
+            <p>A capstone project developed at Capiz State University (2024–2025). This web-based system streamlines scholarship management by:</p>
+            <ul>
+                <li>Providing an intuitive online portal for students to apply and track their application status.</li>
+                <li>Enabling administrators to efficiently manage applications, generate reports, and make data-driven decisions.</li>
+                <li>Automating parts of the recommendation process to reduce manual effort and errors.</li>
+                <li>Improving accessibility and transparency for both applicants and academic staff.</li>
+            </ul>
+        </article>
+    </section>
+
+    <section id="internship">
+        <h2><i class="fa fa-briefcase"></i> Internship Experience</h2>
+        <article>
+            <h3>Social Security System (SSS) - Roxas Branch</h3>
+            <p><strong>Role:</strong> Intern</p>
+            <p><strong>Duration:</strong> March 5 – May 7, 2025 (200 hours)</p>
+            <p>Gained practical experience in a professional office environment, assisting with various IT-related tasks and supporting daily operations. This internship provided valuable insights into real-world application of computer science principles and enhanced my teamwork and problem-solving skills.</p>
+            <div class="buttons">
+                <button id="view-cert-btn"><i class="fa fa-certificate"></i> View Certificate</button>
+            </div>
+            <div id="cert-container" style="display:none">
+                <img src="cert.jpeg" alt="Internship Certificate" id="cert-container-img"/>
+                <div class="buttons">
+                    <a href="cert.jpeg" class="button" download="SSS_Internship_Certificate.jpeg"><i class="fa fa-download"></i> Download Certificate</a>
+                    <button class="button print-button" data-print-target="cert-container-img"><i class="fa fa-print"></i> Print Certificate</button>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section id="awards">
+        <h2><i class="fa fa-trophy"></i> Recognitions & Awards</h2>
+        <article>
+            <h3>Most Frequent Library User</h3>
+            <p>Awarded by Capiz State University - Dayao Satellite College Library, December 12, 2023.</p>
+            <p>This recognition reflects my dedication to continuous learning and research, utilizing library resources extensively for academic and personal growth.</p>
+            <div class="buttons">
+                <button id="view-award-btn"><i class="fa fa-certificate"></i> View Award Certificate</button>
+            </div>
+            <div id="award-container" style="display:none">
+                <img src="award.jpeg" alt="Library Award Certificate" id="award-container-img"/>
+                <div class="buttons">
+                    <a href="award.jpeg" class="button" download="Library_Award_Certificate.jpeg"><i class="fa fa-download"></i> Download Certificate</a>
+                    <button class="button print-button" data-print-target="award-container-img"><i class="fa fa-print"></i> Print Certificate</button>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section id="education">
+        <h2><i class="fa fa-graduation-cap"></i> Education Background</h2>
+        <article>
+            <h3>Bachelor of Science in Computer Science</h3>
+            <p>Capiz State University – Dayao Satellite College</p>
+            <p><em>2021 – 2025</em></p>
+            <p>Focused on core computer science principles, software development methodologies, database management, and web technologies. Completed with a strong foundation in programming and problem-solving.</p>
+        </article>
+        <article>
+            <h3>High School Diploma</h3>
+            <p>Ivisan National High School</p>
+            <p><em>2010 – 2013</em></p>
+        </article>
+    </section>
+
+    <section id="physical-attributes">
+        <h2><i class="fa fa-user"></i> Physical Attributes</h2>
+        <p>
+            <strong>Weight:</strong> 69 kg, <strong>Height:</strong> 6 ft, <strong>Hair Color:</strong> Black, <strong>Eye Color:</strong> Brown
+        </p>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <p>Iloilo, Western Visayas, Philippines</p>
+            <p>Email: <a href="mailto:gasisnovely84@gmail.com">gasisnovely84@gmail.com</a> | Phone: +63 915 998 0930</p>
+            <div class="social-links">
+                <a href="https://github.com/web-dev-nove" target="_blank" title="GitHub Profile"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/NovelyGasisJr" target="_blank" title="Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="copyright"><a href="login.html">&copy;</a> 2025 Novely Gasis Jr. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark/Light Mode Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme'); // Get theme from local storage
+
+            // Apply saved theme on load
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+                // Update button icon based on loaded theme
+                if (currentTheme === 'dark-mode') {
+                    themeToggleBtn.querySelector('i').classList.remove('fa-moon');
+                    themeToggleBtn.querySelector('i').classList.add('fa-sun');
+                } else {
+                    themeToggleBtn.querySelector('i').classList.remove('fa-sun');
+                    themeToggleBtn.querySelector('i').classList.add('fa-moon');
+                }
+            } else {
+                // Default to light mode if no preference is saved (or if it's the first visit)
+                body.classList.remove('dark-mode');
+                themeToggleBtn.querySelector('i').classList.remove('fa-sun');
+                themeToggleBtn.querySelector('i').classList.add('fa-moon');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+
+                let theme = 'light-mode'; // Default to light
+
+                if (body.classList.contains('dark-mode')) {
+                    theme = 'dark-mode';
+                    themeToggleBtn.querySelector('i').classList.remove('fa-moon');
+                    themeToggleBtn.querySelector('i').classList.add('fa-sun');
+                } else {
+                    themeToggleBtn.querySelector('i').classList.remove('fa-sun');
+                    themeToggleBtn.querySelector('i').classList.add('fa-moon');
+                }
+
+                localStorage.setItem('theme', theme); // Save preference
+            });
+        });
+
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('header nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('section, footer'); // Included footer in sections to apply animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Toggle buttons for resume and certificates
+        const toggleBtn = (btnId, containerId, viewIcon, hideIcon, viewText, hideText) => {
+            const btn = document.getElementById(btnId);
+            const box = document.getElementById(containerId);
+            if (btn && box) {
+                btn.addEventListener('click', () => {
+                    const isHidden = box.style.display === 'none' || box.style.display === '';
+                    box.style.display = isHidden ? 'block' : 'none';
+                    btn.innerHTML = isHidden ? `${hideIcon}${hideText}` : `${viewIcon}${viewText}`;
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleBtn('view-resume-btn', 'resume-container', '<i class="fa fa-eye"></i> ', '<i class="fa fa-eye-slash"></i> ', 'View Resume', 'Hide Resume');
+            toggleBtn('view-cert-btn', 'cert-container', '<i class="fa fa-eye"></i> ', '<i class="fa fa-eye-slash"></i> ', 'View Certificate', 'Hide Certificate');
+            toggleBtn('view-award-btn', 'award-container', '<i class="fa fa-eye"></i> ', '<i class="fa fa-eye-slash"></i> ', 'View Award Certificate', 'Hide Award Certificate');
+
+            // Add event listeners for print buttons
+            document.querySelectorAll('.print-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetImgId = button.dataset.printTarget;
+                    const imgToPrint = document.getElementById(targetImgId);
+
+                    if (imgToPrint) {
+                        const printWindow = window.open('', '_blank');
+                        printWindow.document.write('<!DOCTYPE html>');
+                        printWindow.document.write('<html><head><title>Print Document</title>');
+                        printWindow.document.write('<style>');
+                        printWindow.document.write('body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f0f0f0; }');
+                        printWindow.document.write('img { max-width: 100%; max-height: 95vh; display: block; margin: auto; }');
+                        printWindow.document.write('@media print { body { background: none; } img { max-width: 100%; max-height: unset; width: auto; height: auto; } }');
+                        printWindow.document.write('</style>');
+                        printWindow.document.write('</head><body>');
+
+                        const tempImg = printWindow.document.createElement('img');
+                        tempImg.src = imgToPrint.src;
+                        tempImg.alt = "Document to Print";
+
+                        tempImg.onload = () => {
+                            printWindow.document.body.appendChild(tempImg);
+                            printWindow.focus();
+                            printWindow.print();
+                            // Optional: printWindow.onafterprint = () => printWindow.close(); // Uncomment if you want to try closing automatically
+                        };
+
+                        tempImg.onerror = () => {
+                            printWindow.close();
+                            alert('Failed to load image for printing. Please try again.');
+                        };
+
+                        printWindow.document.close();
+                    } else {
+                        alert('Image to print not found!');
+                    }
+                });
+            });
+        });
+
+        // Web3Forms contact form submission (now commented out as its section is commented out)
+        /*
+        const contactForm = document.querySelector('#contact-form form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(contactForm);
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(`Thanks, ${formData.get('name')}! Your message has been sent successfully.`);
+                        contactForm.reset();
+                    } else {
+                        console.error('Web3Forms error:', result);
+                        alert(`Oops! Something went wrong. ${result.message || ''}`);
+                    }
+                } catch (error) {
+                    console.error('Network or submission error:', error);
+                    alert('Could not send message. Please check your internet connection or try again later.');
+                }
+            });
+        }
+        */
+    </script>
+</body>
+</html>

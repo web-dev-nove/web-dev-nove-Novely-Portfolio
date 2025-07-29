@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Engagement Stats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Mono', monospace;
+            background: linear-gradient(135deg, #E0F2F7 0%, #CCDDE2 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #2E86C1;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #F39C12;
+            border-radius: 2px;
+        }
+
+        #counter-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        #counter-table th,
+        #counter-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            color: #5D6D7E;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #counter-table th {
+            background-color: #F8F9F9;
+            font-weight: 700;
+            color: #34495E;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #counter-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Buttons (reusing styles from index.html) */
+        .buttons {
+            margin-top: 30px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 25px;
+            background: #2E86C1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: 'Space Mono', monospace;
+            transition: background .3s ease, transform .2s ease, box-shadow .3s ease, color 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none; /* Ensure no underline for a tags used as buttons */
+        }
+
+        .button:hover {
+            background: #21618C;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        /* Specific style for the clear button */
+        .clear-button {
+            background: #e74c3c; /* Red for destructive action */
+        }
+
+        .clear-button:hover {
+            background: #c0392b;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a242f 100%);
+            color: #ecf0f1;
+        }
+
+        body.dark-mode .dashboard-container {
+            background: rgba(52, 73, 94, 0.9);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode h1 {
+            color: #F39C12;
+        }
+
+        body.dark-mode #counter-table th,
+        body.dark-mode #counter-table td {
+            color: #bdc3c7;
+            border-bottom: 1px solid #4a667f;
+        }
+
+        body.dark-mode #counter-table th {
+            background-color: #4a667f;
+            color: #ecf0f1;
+        }
+
+        body.dark-mode .button {
+            background: #F39C12; /* Use accent for buttons in dark mode */
+            color: #333; /* Dark text on light button */
+            box-shadow:0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-mode .button:hover {
+            background: #E67E22;
+            box-shadow:0 7px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-mode .clear-button {
+            background: #c0392b; /* Darker red for clear button in dark mode */
+            color: #ecf0f1;
+        }
+        body.dark-mode .clear-button:hover {
+            background: #a93222;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            #counter-table th,
+            #counter-table td {
+                padding: 10px;
+                font-size: 1rem;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .button {
+                width: calc(100% - 20px);
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Engagement Dashboard</h1>
+        <table id="counter-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Homepage Views</td>
+                    <td id="homepage-views-count">0</td>
+                </tr>
+                <tr>
+                    <td>CV Views</td>
+                    <td id="cv-views-count">0</td>
+                </tr>
+                <tr>
+                    <td>Certificate Views</td>
+                    <td id="cert-views-count">0</td>
+                </tr>
+                <tr>
+                    <td>Award Views</td>
+                    <td id="award-views-count">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="buttons">
+            <button id="clear-views-btn" class="button clear-button"><i class="fas fa-redo"></i> Clear Views</button>
+        </div>
+    </div>
+
+    <script>
+        const getCounter = (key) => {
+            return parseInt(localStorage.getItem(key) || '0');
+        };
+
+        const updateCounterDisplay = () => {
+            document.getElementById('homepage-views-count').textContent = getCounter('homepageViews');
+            document.getElementById('cv-views-count').textContent = getCounter('cvViews');
+            document.getElementById('cert-views-count').textContent = getCounter('certViews');
+            document.getElementById('award-views-count').textContent = getCounter('awardViews');
+        };
+
+        // Dark/Light Mode Toggle for Dashboard (same logic as index.html for consistency)
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme'); // Get theme from local storage
+
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+            }
+            
+            updateCounterDisplay(); // Update counts on dashboard load
+
+            const clearViewsBtn = document.getElementById('clear-views-btn');
+            if (clearViewsBtn) {
+                clearViewsBtn.addEventListener('click', () => {
+                    localStorage.setItem('homepageViews', '0');
+                    localStorage.setItem('cvViews', '0');
+                    localStorage.setItem('certViews', '0');
+                    localStorage.setItem('awardViews', '0');
+                    alert('All view counts have been reset to zero.');
+                    updateCounterDisplay(); // Update display after clearing
+                });
+            }
+        });
+    </script>
+</body>
+</html>

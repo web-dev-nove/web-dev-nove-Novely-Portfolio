@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easier theme management */
+        :root {
+            --primary-green: #28a745; /* A vibrant nature green */
+            --dark-green: #218838;    /* Darker green for hover */
+            --light-green-bg: #e6f7e8; /* Very light green for sections */
+            --text-dark: #333;
+            --text-medium: #555;
+            --text-light: #777;
+            --off-white: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+        }
+
+        /* Basic Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text-medium);
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1470252814522-8395562762b3?crop=entropy&cs=tinysygb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTd8fG5hdHVyZSUyMGxhbmRzY2FwZXxlbnwwfHx8fDE3MjExODc1MDV8MA&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;
+            color: var(--white);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 35px;
+            border-radius: 50px; /* More rounded, natural feel */
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Features/Community Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--light-green-bg);
+            text-align: center;
+        }
+
+        .features h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--primary-green);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px; /* Slightly more rounded */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-item i {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--text-medium);
+        }
+
+        /* Footer (for index.html) */
+        footer {
+            background: var(--text-dark); /* Dark footer for contrast */
+            color: var(--off-white);
+            padding: 40px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px 30px;
+            padding: 10px 0;
+        }
+
+        .footer-content a {
+            color: var(--off-white);
+            transition: text-decoration 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- Form Page Specific Styles (login.html, signup.html) --- */
+        .form-page-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1510784742417-ad9c4e2cfc23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8Zm9yZXN0JTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3MjExODc1Njh8MA&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        .form-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .form-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 25px;
+        }
+
+        .form-logo i {
+            margin-right: 8px;
+            font-size: 2.2rem;
+        }
+
+        .form-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-medium);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="password"]:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+        }
+
+        .form-link {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        .form-link a {
+            color: var(--primary-green);
+            font-weight: 600;
+            transition: text-decoration 0.3s ease, color 0.3s ease;
+        }
+
+        .form-link a:hover {
+            text-decoration: underline;
+            color: var(--dark-green);
+        }
+
+        .form-separator {
+            border-bottom: 1px solid var(--border-color);
+            margin: 30px 0;
+        }
+
+        /* --- Dashboard Page Specific Styles --- */
+        .dashboard-page-body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--off-white);
+        }
+
+        .dashboard-header {
+            background: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 999;
+        }
+
+        .dashboard-header .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Specific styling for Logout button in dashboard header */
+        .dashboard-header .nav-links li:last-child a.logout-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            transition: background-color 0.3s ease;
+        }
+
+        .dashboard-header .nav-links li:last-child a.logout-btn:hover {
+            background-color: var(--dark-green);
+            color: var(--white);
+        }
+
+        .dashboard-main {
+            flex-grow: 1;
+            padding: 60px 0;
+            background-color: var(--light-green-bg);
+            text-align: center;
+        }
+
+        .dashboard-content-area {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .dashboard-content-area h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-content-area h1 span {
+            color: var(--text-dark);
+        }
+
+        .dashboard-content-area p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .dashboard-card {
+            background: var(--off-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-card i {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .dashboard-card p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card .card-link {
+            display: inline-block;
+            color: var(--primary-green);
+            font-weight: 600;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .dashboard-card .card-link:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-footer {
+            background: var(--text-dark);
+            color: var(--off-white);
+            padding: 20px 0;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            .features h2 {
+                font-size: 2.2rem;
+            }
+            .form-container {
+                padding: 30px;
+            }
+            .form-container h2 {
+                font-size: 1.8rem;
+            }
+            .dashboard-content-area h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features h2 {
+                font-size: 1.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-container {
+                width: 95%;
+                margin: 20px;
+            }
+            .form-logo {
+                font-size: 1.6rem;
+            }
+            .form-logo i {
+                font-size: 2rem;
+            }
+            .form-container h2 {
+                font-size: 1.6rem;
+            }
+            .dashboard-content-area {
+                padding: 30px 20px;
+            }
+            .dashboard-content-area h1 {
+                font-size: 2.2rem;
+            }
+            .dashboard-content-area p {
+                font-size: 1rem;
+            }
+            .dashboard-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-header .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .dashboard-header .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .dashboard-header .nav-links li:last-child {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="form-page-body">
+    <div class="form-container">
+        <a href="index.html" class="form-logo">
+            <i class="fas fa-leaf"></i>My Portfolio
+        </a>
+        <h2>Enter Passcode to Login</h2>
+        <form id="login-form" class="auth-form">
+            <div class="form-group">
+                <label for="passcode">Passcode</label>
+                <input type="password" id="passcode" name="passcode" placeholder="Enter your passcode" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Passcode for login
+            const CORRECT_PASSCODE = "082994"; // The user's provided passcode
+
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Prevent default form submission
+
+                    const passcodeInput = document.getElementById('passcode');
+                    const enteredPasscode = passcodeInput.value;
+
+                    if (enteredPasscode === CORRECT_PASSCODE) {
+                        // Passcode is correct, redirect to dashboard
+                        window.location.href = "dashboard.html";
+                    } else {
+                        // Passcode is incorrect
+                        alert("Incorrect passcode. Please try again.");
+                        passcodeInput.value = ""; // Clear the input field
+                        passcodeInput.focus(); // Focus back on the input
+                    }
+                });
+            }
+
+            // Mobile Navigation Toggle (only relevant for index.html)
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+
+            if (mobileMenu && navLinks) { // Check if elements exist on the page
+                mobileMenu.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+
+                // Close mobile menu if a link is clicked
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                    });
+                });
+            }
+
+            // Smooth scrolling for navigation links (only relevant for index.html)
+            // This part should specifically run for internal links on the same page.
+            // Dashboard header nav links are external to sections.
+            const currentPath = window.location.pathname;
+            if (currentPath.includes('index.html') || currentPath === '/' || currentPath === '/Novely-Portfolio/') { // Adjust for your root path
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+
+                        if (targetElement) {
+                            const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                            window.scrollTo({
+                                top: targetElement.offsetTop - headerHeight,
+                                behavior: 'smooth'
+                            });
+
+                            if (navLinks && navLinks.classList.contains('active')) {
+                                navLinks.classList.remove('active');
+                            }
+                        }
+                    });
+                });
+            }
+
+
+            // --- Logic for Dashboard Page ---
+            const displayUsernameElement = document.getElementById('display-username');
+            if (displayUsernameElement) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const username = urlParams.get('username');
+
+                if (username) {
+                    displayUsernameElement.textContent = decodeURIComponent(username);
+                } else {
+                    displayUsernameElement.textContent = 'Explorer'; // Default if no username is found
+                }
+            }
+        });
+    </script>
+</body>
+</html>
